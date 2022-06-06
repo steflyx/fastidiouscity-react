@@ -2,6 +2,15 @@
 
 This project is a reboot of my Master's thesis project "Fastidiouscity". It is build in React, while using GPT-3 as backend tool.
 
+## Requirements to run this repository locally
+
+In order to run this repository, you need to have a GPT3 api key available. \
+If you do, create in the root folder of the project a file called ".env" and write the following line:
+
+### `REACT_APP_GPT3_API_KEY = "your-api-key";`
+
+Then follow the React instructions indicated in the next paragraph.
+
 ## How to run
 
 In the project directory, you can run:
