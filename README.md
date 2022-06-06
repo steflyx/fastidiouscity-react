@@ -1,8 +1,8 @@
-# Getting Started with Create React App
+# Fastidiouscity
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a reboot of my Master's thesis project "Fastidiouscity". It is build in React, while using GPT-3 as backend tool.
 
-## Available Scripts
+## How to run
 
 In the project directory, you can run:
 
@@ -29,42 +29,15 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## How to add sections
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Analysis sections are coded in the folder "AnalysisSections". \
+Each section is a class implementing two methods: "compute" and "draw".
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+"Compute" is launched from the main application when the user clicks on "Analyze". This function doesn't need to return anything, it can simply modify the inner state of the class. If the computation requires some backend waiting time, it should be async and only finish when everything is ready.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+"Draw" is launched from the main application after all of the sections have completed their computations (sections are launched in parallel). This function should return a React component with parameters defined by the class itself.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Classes can access the backend utility function getGPT3Response(prompt, params) to communicate with GPT-3 using the following import:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### `import { getGPT3Response } from "../BackEnd/BackEnd";`

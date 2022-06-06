@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import {
+  AnalysisSection,
+  sectionTypes,
+} from "./AnalysisSections/AnalysisSection";
+import { Input } from "./Components/Input";
+import { STATUS_TYPES } from "./Utilities/constants";
 
 function App() {
+  const [input, setInput] = useState(null);
+  const [analysisSections, setAnalysisSections] = useState(
+    sectionTypes.map((section) => new AnalysisSection(section))
+  );
+  const [status, setStatus] = useState(STATUS_TYPES.IDLE);
+
+  async function analyzeInput() {
+    await Promise.all(
+      analysisSections.map((analysisSection) => analysisSection.compute(input))
+    );
+    setStatus(STATUS_TYPES.PROCESSED);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <Input
+        setInput={setInput}
+        analyzeInput={analyzeInput}
+        status={status}
+        setStatus={setStatus}
+      />
+      {status === STATUS_TYPES.PROCESSED
+        ? analysisSections.map((analysisSection, key) =>
+            analysisSection.draw(key)
+          )
+        : null}
+    </main>
   );
 }
 
