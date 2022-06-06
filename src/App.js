@@ -7,6 +7,7 @@ import { Input } from "./Components/Input";
 import { STATUS_TYPES } from "./Utilities/constants";
 
 function App() {
+  console.log("aaa");
   const [input, setInput] = useState(null);
   const [analysisSections, setAnalysisSections] = useState(
     sectionTypes.map((section) => new AnalysisSection(section))
