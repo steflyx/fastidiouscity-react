@@ -3,3 +3,5 @@ export const STATUS_TYPES = {
   PROCESSING: 2,
   PROCESSED: 3,
 };
+
+export const MAX_ARTICLE_LENGTH = 5000;
