@@ -1,40 +1,43 @@
 import { useState } from "react";
-import {
-  AnalysisSection,
-  sectionTypes,
-} from "./AnalysisSections/AnalysisSection";
-import { Input } from "./Components/Input";
+import { Input, LoadingPage, Output } from "./Pages/Pages";
+import { Sections } from "./Sections/Sections";
 import { STATUS_TYPES } from "./Utilities/constants";
 
 function App() {
-  const [input, setInput] = useState(null);
-  const [analysisSections, setAnalysisSections] = useState(
-    sectionTypes.map((section) => new AnalysisSection(section))
-  );
-  const [status, setStatus] = useState(STATUS_TYPES.IDLE);
+  const [inputText, setInputText] = useState(null);
+  const [status, setStatus] = useState(STATUS_TYPES.WAITING_INPUT);
+  const [sections, setSections] = useState(new Sections());
 
-  async function analyzeInput() {
-    await Promise.all(
-      analysisSections.map((analysisSection) => analysisSection.compute(input))
-    );
+  function analyzeInput() {
+    setStatus(STATUS_TYPES.PROCESSING);
+    sections.compute(inputText, onComplete);
+  }
+
+  function onComplete() {
     setStatus(STATUS_TYPES.PROCESSED);
   }
 
-  return (
-    <main>
-      <Input
-        setInput={setInput}
-        analyzeInput={analyzeInput}
-        status={status}
-        setStatus={setStatus}
-      />
-      {status === STATUS_TYPES.PROCESSED
-        ? analysisSections.map((analysisSection, key) =>
-            analysisSection.draw(key)
-          )
-        : null}
-    </main>
-  );
+  if (status === STATUS_TYPES.WAITING_INPUT) {
+    return (
+      <main>
+        <Input setInputText={setInputText} analyze={analyzeInput} />
+      </main>
+    );
+  }
+  if (status === STATUS_TYPES.PROCESSING) {
+    return (
+      <main>
+        <LoadingPage />
+      </main>
+    );
+  }
+  if (status === STATUS_TYPES.PROCESSED) {
+    return (
+      <main>
+        <Output sections={sections} />
+      </main>
+    );
+  }
 }
 
 export default App;

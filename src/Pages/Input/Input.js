@@ -1,9 +1,7 @@
 import "./Input.css";
-import "../Utilities/loader.css";
-import { examples } from "../Examples/Examples";
-import { STATUS_TYPES } from "../Utilities/constants";
+import { examples } from "../../Examples/Examples";
 
-export function Input({ setInput, analyzeInput, status, setStatus }) {
+export function Input({ setInputText, analyze }) {
   return (
     <section id="input-section">
       <h1>Welcome to Fastidiouscity!</h1>
@@ -16,7 +14,7 @@ export function Input({ setInput, analyzeInput, status, setStatus }) {
           <li
             onMouseUp={() => {
               document.getElementById("speech-input").value = example.text;
-              setInput(example.text);
+              setInputText(example.text);
             }}
             key={key}
           >
@@ -26,22 +24,11 @@ export function Input({ setInput, analyzeInput, status, setStatus }) {
       </ul>
       <textarea
         id="speech-input"
-        onChange={(evt) => setInput(evt.target.value)}
+        onChange={(evt) => setInputText(evt.target.value)}
       ></textarea>
-      <div
-        className="button"
-        style={{ display: status === STATUS_TYPES.IDLE ? "" : "none" }}
-        onMouseUp={() => {
-          setStatus(STATUS_TYPES.PROCESSING);
-          analyzeInput();
-        }}
-      >
+      <div className="button" onMouseUp={analyze}>
         Analyze!
       </div>
-      <div
-        className="loader"
-        style={{ display: status === STATUS_TYPES.PROCESSING ? "" : "none" }}
-      ></div>
     </section>
   );
 }
