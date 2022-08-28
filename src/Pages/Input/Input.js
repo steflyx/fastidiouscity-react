@@ -1,9 +1,12 @@
 import "./Input.css";
 import { examples } from "../../Examples/Examples";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Input({ setInputText, analyze }) {
   const [selectedSpeech, setSelectedSpeech] = useState(null);
+
+  useEffect(() => analyze());
+
   return (
     <section id="input-section">
       <div className="titleContainer">
@@ -25,7 +28,7 @@ export function Input({ setInputText, analyze }) {
           <path
             d="M8.5 -3.71547e-07L8.5 18M8.5 18C8.5 18 11.6875 10.5882 17 10.5882M8.5 18C8.5 18 5.3125 10.5882 -4.62826e-07 10.5882"
             stroke="black"
-            stroke-width="1.5"
+            strokeWidth="1.5"
           />
         </svg>
       </div>
@@ -62,7 +65,7 @@ export function Input({ setInputText, analyze }) {
             ))}
           </ul>
         </div>
-        <div>
+        <div className="buttonContainer">
           <button className="button" onMouseUp={analyze}>
             Analyze!
           </button>

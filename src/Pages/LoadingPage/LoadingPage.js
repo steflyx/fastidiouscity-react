@@ -1,7 +1,11 @@
+import { Loader } from "../../ReusableComponents/Loader/Loader";
+import "./LoadingPage.css";
+
 export function LoadingPage() {
   return (
-    <>
-      <h1>Loading</h1>
-    </>
+    <section className="loadingContainer">
+      <Loader />
+      <h2 className="loadingText">Loading... This might take a few moments</h2>
+    </section>
   );
 }

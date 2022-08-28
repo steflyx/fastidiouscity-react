@@ -1,0 +1,66 @@
+.allClaimsContainer{
+    display: flex;
+    flex-direction: column;
+    min-height: 50vh;
+}
+
+.disclaimer{
+    font-family: 'Bodoni 72';
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 30px;
+    color: #000000;
+}
+
+@media (max-width: 768px){
+    .disclaimer{
+        font-size: 22px;
+        line-height: 30px;
+    }
+}
+
+.loaderContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.loaderContainer p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-top: 10px;
+}
+
+.allClaims{
+    font-family: 'Bodoni 72';
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 35px;
+    color: #000000;
+    cursor: pointer;
+}
+
+@media (max-width: 768px){
+    .allClaims{
+        font-size: 26px;
+        line-height: 30px;
+    }
+}
+
+.allClaimsTextContainer{
+    padding: 5% 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (max-width: 768px){
+    .allClaimsTextContainer{
+        padding: 20% 20px;
+    }
+}

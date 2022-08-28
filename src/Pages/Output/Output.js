@@ -1,3 +1,5 @@
+import "./Output.css";
+
 export function Output({ sections }) {
-  return <>{sections.draw()}</>;
+  return <section className="sectionContainer">{sections.draw()}</section>;
 }

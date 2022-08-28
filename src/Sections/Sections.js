@@ -1,11 +1,11 @@
 import { computeMainClaim } from "./Logic/MainClaim/MainClaim";
 import { computeAllClaims } from "./Logic/AllClaims/AllClaims";
-import { drawMainClaim } from "./Graphic/MainClaim/MainClaim";
-import { drawAllClaims } from "./Graphic/AllClaims/AllClaims";
+import { DrawMainClaim } from "./Graphic/MainClaim/MainClaim";
+import { DrawAllClaims } from "./Graphic/AllClaims/AllClaims";
 
 const sections = [
-  { name: "MainClaim", compute: computeMainClaim, draw: drawMainClaim },
-  { name: "AllClaims", compute: computeAllClaims, draw: drawAllClaims },
+  { name: "MainClaim", compute: computeMainClaim, draw: DrawMainClaim },
+  { name: "AllClaims", compute: computeAllClaims, draw: DrawAllClaims },
 ];
 
 export class Sections {

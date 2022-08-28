@@ -1,3 +1,9 @@
+:root{
+  --main-green: #C6F887;
+  --green-hover: #84a55c;
+  --link-color: #020D89;
+}
+
 @font-face {
   font-family: 'Syne';
   src: url('./Fonts/Syne-Regular.woff') format('woff');
@@ -36,7 +42,7 @@ h1,h2,h3,h4,h5,h6,p{
   margin: 0;
 }
 
-h1,h2{
+h1,h2, h3{
   font-family: 'Syne', sans-serif;
 }
 
@@ -46,11 +52,51 @@ h1{
   line-height: 60px;
 }
 
+@media (max-width: 768px){
+  h1{
+    font-size: 45px;
+    line-height: 50px;
+  }
+}
+
+@media (max-width: 350){
+  h1{
+    font-size: 40px;
+    line-height: 45px;
+  }
+}
+
 h2{
-  font-style: normal;
   font-weight: 400;
   font-size: 24px;
   color: #6C6C6C;
+}
+
+h3{
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 60px;
+}
+
+@media (max-width: 768px){
+  h3{
+    font-size: 40px;
+    line-height: 50px;
+  }
+}
+
+h4{
+  font-family: "Bodoni 72", sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 38px;
+}
+
+@media (max-width: 768px){
+  h4{
+    font-size: 30px;
+    line-height: 35px;
+  }
 }
 
 .halfHighlight{
