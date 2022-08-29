@@ -12,7 +12,7 @@ export function DrawAllClaims({ output }) {
     console.log(claim);
     setSelectedClaim(claim);
     setArticles((oldArray) => []);
-    const relatedArticles = []; //await getRelatedArticles(claim);
+    const relatedArticles = await getRelatedArticles(claim);
     setArticles((oldArray) => [...relatedArticles]);
   }
 
