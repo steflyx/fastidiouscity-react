@@ -1,9 +1,11 @@
 import "./Input.css";
 import { examples } from "../../Examples/Examples";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function Input({ setInputText, analyze }) {
   const [selectedSpeech, setSelectedSpeech] = useState(null);
+
+  useEffect(() => analyze());
 
   return (
     <section id="input-section">

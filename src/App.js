@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Input, LoadingPage, Output } from "./Pages/Pages";
 import { Sections } from "./Sections/Sections";
 import { STATUS_TYPES } from "./Utilities/constants";
+import { examples } from "./Examples/Examples";
 
 function App() {
   const [inputText, setInputText] = useState(null);
@@ -10,7 +11,10 @@ function App() {
 
   function analyzeInput() {
     setStatus(STATUS_TYPES.PROCESSING);
-    sections.compute(inputText, onComplete);
+    sections.compute(
+      inputText === null ? examples[1].text : inputText,
+      onComplete
+    );
   }
 
   function onComplete() {

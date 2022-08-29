@@ -1,0 +1,72 @@
+#textQualityContainer p{
+    font-family: 'Bodoni 72';
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 35px;
+}
+
+@media (max-width: 768px){
+    #textQualityContainer p{
+        font-size: 22px;
+    }
+}
+
+#textQualityContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    max-width: 760px;
+    width: 90%;
+    margin: auto;
+}
+
+@media (max-width: 768px){
+    #textQualityContainer{
+        width: 100%;
+    }
+}
+
+#textQualityContainer div{
+    display: flex;
+    gap: 20px
+}
+
+@media (max-width: 768px){
+    #textQualityContainer div{
+        gap: 10px
+    }
+}
+
+#textQualityContainer div div{
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rotatedArrow{
+    transform: rotate(270deg);
+    margin-top: 3px;
+    min-width: 14px;
+}
+
+.globalMark{
+    text-decoration: underline;
+    background: linear-gradient(180deg,rgba(255,255,255,0) 65%, rgba(71, 164, 69, 0.56) 65%);
+}
+
+.enlargedValue{
+    font-size: 42px;
+}
+
+@media (max-width: 768px){
+    .enlargedValue{
+        font-size: 35px;
+    }
+}
+
+.positiveScore{
+    color: #47A445;
+}
+
+.negativeScore{
+    color: #C91403;
+}

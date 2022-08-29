@@ -1,0 +1,38 @@
+export const data = {
+  percRepeatedWords: {
+    avg: 0.57,
+    scores: [
+      { mark: "Ap", value: 0.2824755989352263 },
+      { mark: "A", value: 0.3567851392886764 },
+      { mark: "Am", value: 0.3816077471380228 },
+      { mark: "Bp", value: 0.41476781968494225 },
+      { mark: "B", value: 0.45910250501343763 },
+      { mark: "Bm", value: 0.4750439661395105 },
+      { mark: "Cp", value: 0.49693655446159674 },
+      { mark: "C", value: 0.5225794647460954 },
+      { mark: "Cm", value: 0.534006744634195 },
+      { mark: "Dp", value: 0.5460406789452862 },
+      { mark: "D", value: 0.5653367974971664 },
+      { mark: "Dm", value: 0.5719469697416202 },
+      { mark: "E", value: 0.6058734144999801 },
+    ],
+  },
+  avgWordsPerSentence: {
+    avg: 16.4,
+    scores: [
+      { mark: "Ap", value: 21.375520084363913 },
+      { mark: "A", value: 20.201490312965724 },
+      { mark: "Am", value: 19.845869603837272 },
+      { mark: "Bp", value: 19.403880447820868 },
+      { mark: "B", value: 18.83305785123967 },
+      { mark: "Bm", value: 18.64038722782962 },
+      { mark: "Cp", value: 18.409519747725394 },
+      { mark: "C", value: 17.98927517992685 },
+      { mark: "Cm", value: 17.824414115812047 },
+      { mark: "Dp", value: 17.578125 },
+      { mark: "D", value: 17.211043037249716 },
+      { mark: "Dm", value: 17.086220238095237 },
+      { mark: "E", value: 16.430602869226302 },
+    ],
+  },
+};
