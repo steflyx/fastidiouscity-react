@@ -4,8 +4,6 @@ import { MAX_ARTICLE_LENGTH } from "../Utilities/constants";
 export async function sendRequestOpenAI(prompt, maxTokens) {
   const gpt3Model = "text-davinci-002";
 
-  return "Lorem Ipsum";
-
   try {
     return await fetch(URL_SERVER + "/gpt3connector", {
       method: "POST",
@@ -36,12 +34,6 @@ export async function sendRequestOpenAI(prompt, maxTokens) {
 }
 
 export async function scrapeArticle(link) {
-  return {
-    text: "Lorem Ipsum",
-    title: "Lorem Ipsum",
-    img: "",
-    url: "https://www.repstatic.it/content/nazionale/img/2022/08/29/140826930-8f30118a-a074-4ec1-bc5c-698a1a235b47.jpg",
-  };
   try {
     return await fetch(URL_SERVER + "/scrapeArticle", {
       method: "POST",
@@ -95,7 +87,6 @@ export async function scrapeCleanArticle(link) {
 }
 
 export async function retrieveRelatedUrls(query) {
-  return ["url1", "url2", "url3"];
   try {
     return await fetch(URL_SERVER + "/googleSearch", {
       method: "POST",

@@ -6,6 +6,8 @@ import { DrawAllClaims } from "./Graphic/AllClaims/AllClaims";
 import { DrawPoliticalSpectrum } from "./Graphic/PoliticalSpectrum/PoliticalSpectrum";
 import { computeTextQuality } from "./Logic/TextQuality/TextQuality";
 import { DrawTextQuality } from "./Graphic/TextQuality/TextQuality";
+import { computeConclusion } from "./Logic/Conclusion/Conclusion";
+import { DrawConclusion } from "./Graphic/Conclusion/Conclusion";
 
 const sections = [
   { name: "MainClaim", compute: computeMainClaim, draw: DrawMainClaim },
@@ -16,6 +18,7 @@ const sections = [
     draw: DrawPoliticalSpectrum,
   },
   { name: "TextQuality", compute: computeTextQuality, draw: DrawTextQuality },
+  { name: "Conclusion", compute: computeConclusion, draw: DrawConclusion },
 ];
 
 export class Sections {

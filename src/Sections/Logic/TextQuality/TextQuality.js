@@ -131,8 +131,6 @@ export async function computeTextQuality(text) {
     },
   };
 
-  console.log(readabilityIndex);
-
   const globalScore = averageScores([
     output.percRepeatedWords.score,
     output.avgWordsPerSentence.score,

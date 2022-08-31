@@ -1,0 +1,24 @@
+.conclusionContainer p{
+    font-family: 'Bodoni 72';
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 35px;
+    padding: 10% 5%;
+}
+
+@media (max-width: 768px){
+    .conclusionContainer p{
+        padding: 5%;
+        font-size: 26px;
+        line-height: 30px;
+    }
+}
+
+@media (max-width: 500px){
+    .conclusionContainer p{
+        padding: 0;
+        margin-top: 5%;
+        font-size: 22px;
+        line-height: 26px;
+    }
+}

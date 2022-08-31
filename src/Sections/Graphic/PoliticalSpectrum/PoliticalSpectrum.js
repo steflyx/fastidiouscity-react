@@ -1,7 +1,8 @@
 import "./PoliticalSpectrum.css";
 
 function computePoliticalLeaning(response) {
-  if (response === "Liberal" && response === "Conservative") return response;
+  console.log(response);
+  if (response === "Liberal" || response === "Conservative") return response;
   if (response.search("Liberal") > 0 && response.search("Conservative") < 0)
     return "Liberal";
   if (response.search("Liberal") < 0 && response.search("Conservative") > 0)

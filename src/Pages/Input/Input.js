@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 export function Input({ setInputText, analyze }) {
   const [selectedSpeech, setSelectedSpeech] = useState(null);
 
-  useEffect(() => analyze());
+  //useEffect(() => analyze());
 
   return (
     <section id="input-section">
