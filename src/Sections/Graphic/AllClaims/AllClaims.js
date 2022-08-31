@@ -9,7 +9,6 @@ export function DrawAllClaims({ output }) {
   const [articles, setArticles] = useState([]);
 
   async function analyzeClaim(claim) {
-    console.log(claim);
     setSelectedClaim(claim);
     setArticles((oldArray) => []);
     const relatedArticles = await getRelatedArticles(claim);
