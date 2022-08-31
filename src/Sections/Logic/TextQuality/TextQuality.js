@@ -14,7 +14,6 @@ function removePunctuation(text) {
 }
 
 function computePercentageRepeatedWords(text) {
-  console.log(text);
   const textPunctuationLess = removePunctuation(text);
   const words = textPunctuationLess
     .split(" ")
@@ -26,8 +25,12 @@ function computePercentageRepeatedWords(text) {
   return 1 - uniqueWords.length / words.length;
 }
 
+function computeSentences(text) {
+  return text.match(/[^\.!\?]+[\.!\?]+/g);
+}
+
 function computeAvgWordsPerSentence(text) {
-  const sentences = text.match(/[^\.!\?]+[\.!\?]+/g);
+  const sentences = computeSentences(text);
   const wordsPerSentence = sentences.map(
     (sentence) => removePunctuation(sentence).split(" ").length
   );
@@ -59,9 +62,49 @@ function averageScores(values) {
   return Object.entries(scoreToPerc).find((score) => score[1] < avg)[0];
 }
 
+function countSyllables(word) {
+  word = word.toLowerCase();
+  if (word.length <= 3) {
+    return 1;
+  }
+  word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "");
+  word = word.replace(/^y/, "");
+  return word.match(/[aeiouy]{1,2}/g).length;
+}
+
+function computeFleschScore(text) {
+  const fleschScores = [
+    { value: 90, mark: "a 5th grade student", letterScore: "F" },
+    { value: 80, mark: "a 6th grade student", letterScore: "E" },
+    { value: 70, mark: "a 7th grade student", letterScore: "D" },
+    { value: 60, mark: "a 9th grade student", letterScore: "C" },
+    { value: 50, mark: "a 12th grade student", letterScore: "Cp" },
+    { value: 30, mark: "a college student", letterScore: "B" },
+    { value: 10, mark: "a college graduate", letterScore: "A" },
+    { value: 0, mark: "an expert in the field", letterScore: "Ap" },
+  ];
+
+  const numberOfSentences = computeSentences(text).length;
+  const words = removePunctuation(text).split(" ");
+  const syllablesPerWord = words.map((word) => countSyllables(word));
+  const totSyllables = syllablesPerWord.reduce((a, b) => a + b, 0);
+  const score =
+    206.835 -
+    (1.015 * words.length) / numberOfSentences -
+    (84.6 * totSyllables) / words.length;
+  const index = getScore(score, fleschScores, false);
+  const readabilityIndex = {
+    index: index,
+    score: fleschScores.find((score) => score.mark === index).letterScore,
+  };
+  return readabilityIndex;
+}
+
 export async function computeTextQuality(text) {
-  const percRepeatedWords = computePercentageRepeatedWords(text);
-  const avgWordsPerSentence = computeAvgWordsPerSentence(text);
+  const textAdj = text + ".";
+  const percRepeatedWords = computePercentageRepeatedWords(textAdj);
+  const avgWordsPerSentence = computeAvgWordsPerSentence(textAdj);
+  const readabilityIndex = computeFleschScore(textAdj);
 
   const output = {
     percRepeatedWords: {
@@ -82,11 +125,18 @@ export async function computeTextQuality(text) {
         false
       ),
     },
+    readabilityIndex: {
+      index: readabilityIndex.index,
+      score: readabilityIndex.score,
+    },
   };
+
+  console.log(readabilityIndex);
 
   const globalScore = averageScores([
     output.percRepeatedWords.score,
     output.avgWordsPerSentence.score,
+    output.readabilityIndex.score,
   ]);
   output.globalScore = globalScore;
   return output;
