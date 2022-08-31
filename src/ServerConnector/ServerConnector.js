@@ -51,7 +51,7 @@ export async function scrapeArticle(link) {
           return res.json();
         }
         if (res.status === 400) {
-          throw "Articolo irraggiungibile";
+          return "Articolo irraggiungibile";
         }
         throw "Errore di connessione con il server";
       })
@@ -64,9 +64,6 @@ export async function scrapeArticle(link) {
         };
       });
   } catch (error) {
-    if (error === "Articolo irraggiungibile") {
-      throw "Articolo irraggiungibile";
-    }
     throw "Errore di connessione con il server";
   }
 }

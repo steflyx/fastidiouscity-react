@@ -17,8 +17,11 @@ export async function getRelatedArticles(claim) {
   const relatedArticles = await Promise.all(
     relatedArticlesUrls.map((url) => scrapeCleanArticle(url))
   );
+  const relatedArticlesClean = relatedArticles.filter(
+    (article) => article !== "Articolo irragiungibile"
+  );
   const relatedArticlesWithSupportInfo = await Promise.all(
-    relatedArticles.map((article) => isArticleSupporting(claim, article))
+    relatedArticlesClean.map((article) => isArticleSupporting(claim, article))
   );
   return relatedArticlesWithSupportInfo;
 }

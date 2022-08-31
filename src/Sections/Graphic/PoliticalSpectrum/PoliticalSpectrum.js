@@ -1,21 +1,20 @@
 import "./PoliticalSpectrum.css";
 
 function computePoliticalLeaning(response) {
-  console.log(response);
-  if (response === "Liberal" || response === "Conservative") return response;
-  if (response.search("Liberal") > 0 && response.search("Conservative") < 0)
-    return "Liberal";
-  if (response.search("Liberal") < 0 && response.search("Conservative") > 0)
-    return "Conservative";
-  return "Neutral";
+  if (response === "liberal" || response === "conservative") return response;
+  if (response.search("liberal") > 0 && response.search("conservative") < 0)
+    return "liberal";
+  if (response.search("liberal") < 0 && response.search("conservative") > 0)
+    return "conservative";
+  return "neutral";
 }
 
 export function DrawPoliticalSpectrum({ output }) {
-  const leaning = computePoliticalLeaning(output);
+  const leaning = computePoliticalLeaning(output.toLocaleLowerCase());
   const barPosition = {
-    Liberal: "politicalBarLiberal",
-    Neutral: "politicalBarNeutral",
-    Conservative: "politicalBarConservative",
+    liberal: "politicalBarLiberal",
+    neutral: "politicalBarNeutral",
+    conservative: "politicalBarConservative",
   };
 
   return (
