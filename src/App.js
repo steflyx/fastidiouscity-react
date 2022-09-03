@@ -14,12 +14,17 @@ function App() {
     setStatus(STATUS_TYPES.PROCESSING);
     sections.compute(
       inputText === null ? examples[1].text : inputText,
-      onComplete
+      onComplete,
+      onFailure
     );
   }
 
   function onComplete() {
     setStatus(STATUS_TYPES.PROCESSED);
+  }
+
+  function onFailure() {
+    setStatus(STATUS_TYPES.ERROR);
   }
 
   if (status === STATUS_TYPES.WAITING_INPUT) {
@@ -34,10 +39,10 @@ function App() {
       </main>
     );
   }
-  if (status === STATUS_TYPES.PROCESSING) {
+  if (status === STATUS_TYPES.PROCESSING || status === STATUS_TYPES.ERROR) {
     return (
       <main>
-        <LoadingPage />
+        <LoadingPage isError={status === STATUS_TYPES.ERROR} />
       </main>
     );
   }

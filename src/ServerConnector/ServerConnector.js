@@ -85,7 +85,11 @@ async function cleanAndSummarizeArticle(text) {
 export async function scrapeCleanArticle(link) {
   const article = await scrapeArticle(link);
   if (article.text === "Article unreachable") return article;
-  article.text = await cleanAndSummarizeArticle(article.text);
+  try {
+    article.text = await cleanAndSummarizeArticle(article.text);
+  } catch {
+    article.text = article.title;
+  }
   return article;
 }
 
@@ -106,12 +110,12 @@ export async function retrieveRelatedUrls(query) {
         if (res.status === 200) {
           return res.json();
         }
-        throw "Errore di connessione con il server";
+        return [];
       })
       .then((res) => {
         return res.urls;
       });
   } catch (error) {
-    throw "Errore di connessione con il server";
+    return [];
   }
 }

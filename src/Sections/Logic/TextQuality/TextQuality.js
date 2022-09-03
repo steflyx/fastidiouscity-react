@@ -1,6 +1,24 @@
 import { data } from "./DataHistoric";
 import { stopwords } from "./Stopwords";
 
+const scoresLetterPercentage = [
+  { letterMark: "Ap", percScore: 95 },
+  { letterMark: "A", percScore: 90 },
+  { letterMark: "Am", percScore: 88 },
+  { letterMark: "Bp", percScore: 85 },
+  { letterMark: "B", percScore: 80 },
+  { letterMark: "Bm", percScore: 78 },
+  { letterMark: "Cp", percScore: 75 },
+  { letterMark: "C", percScore: 70 },
+  { letterMark: "Cm", percScore: 68 },
+  { letterMark: "Dp", percScore: 65 },
+  { letterMark: "D", percScore: 60 },
+  { letterMark: "Dm", percScore: 58 },
+  { letterMark: "Ep", percScore: 48 },
+  { letterMark: "E", percScore: 40 },
+  { letterMark: "F", percScore: 20 },
+];
+
 function getScore(value, scores, reverse) {
   const score = scores.find((score) =>
     reverse ? score.value > value : score.value < value
@@ -13,15 +31,19 @@ function removePunctuation(text) {
   return textPunctuationLess.replace(/\s{2,}/g, " ");
 }
 
+function getUniqueWords(words) {
+  return words.reduce((unique, curr) => {
+    const exists = unique.find((word) => word === curr);
+    return exists ? unique : unique.concat(curr);
+  }, []);
+}
+
 function computePercentageRepeatedWords(text) {
   const textPunctuationLess = removePunctuation(text);
   const words = textPunctuationLess
     .split(" ")
     .filter((word) => word !== "" && !stopwords.includes(word));
-  const uniqueWords = words.reduce((unique, curr) => {
-    const exists = unique.find((word) => word === curr);
-    return exists ? unique : unique.concat(curr);
-  }, []);
+  const uniqueWords = getUniqueWords(words);
   return 1 - uniqueWords.length / words.length;
 }
 
@@ -29,48 +51,44 @@ function computeSentences(text) {
   return text.match(/[^\.!\?]+[\.!\?]+/g);
 }
 
+function sumArray(arr) {
+  return arr.reduce((a, b) => a + b, 0);
+}
+
 function computeAvgWordsPerSentence(text) {
   const sentences = computeSentences(text);
   const wordsPerSentence = sentences.map(
     (sentence) => removePunctuation(sentence).split(" ").length
   );
-  const sum = wordsPerSentence.reduce((a, b) => a + b, 0);
-  return sum / wordsPerSentence.length || 0;
+  return sumArray(wordsPerSentence) / wordsPerSentence.length || 0;
+}
+
+function letterScoreToPerc(letter) {
+  return scoresLetterPercentage.find((score) => score.letterMark === letter)
+    .percScore;
+}
+
+function PercScoreToLetter(percentage) {
+  return scoresLetterPercentage.find((score) => score.percScore <= percentage)
+    .letterMark;
 }
 
 function averageScores(values) {
-  const scoreToPerc = {
-    Ap: 95,
-    A: 90,
-    Am: 88,
-    Bp: 85,
-    B: 80,
-    Bm: 78,
-    Cp: 75,
-    C: 70,
-    Cm: 68,
-    Dp: 65,
-    D: 60,
-    Dm: 58,
-    Ep: 48,
-    E: 40,
-    F: 20,
-  };
-
-  const percentages = values.map((value) => scoreToPerc[value]);
-  const avg = percentages.reduce((a, b) => a + b, 0) / percentages.length;
-  return Object.entries(scoreToPerc).find((score) => score[1] < avg)[0];
+  const percentages = values.map((value) => letterScoreToPerc(value));
+  const avgPercentage = sumArray(percentages) / percentages.length;
+  return PercScoreToLetter(avgPercentage);
 }
 
 function countSyllables(word) {
-  word = word.toLowerCase();
   if (word.length <= 3) {
     return 1;
   }
-  word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "");
-  word = word.replace(/^y/, "");
-  const syllables = word.match(/[aeiouy]{1,2}/g);
-  return syllables === null ? null : syllables.length;
+  const wordSimplified = word
+    .toLowerCase()
+    .replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "")
+    .replace(/^y/, "");
+  const syllables = wordSimplified.match(/[aeiouy]{1,2}/g);
+  return syllables?.length;
 }
 
 function computeFleschScore(text) {
@@ -87,15 +105,19 @@ function computeFleschScore(text) {
 
   const numberOfSentences = computeSentences(text).length;
   const words = removePunctuation(text).split(" ");
-  const syllablesPerWord = words
-    .map((word) => countSyllables(word))
-    .filter((syllable) => syllable !== null);
-  const totSyllables = syllablesPerWord.reduce((a, b) => a + b, 0);
+  const numberOfWords = words.length;
+  const numberOfSyllables = sumArray(
+    words
+      .map((word) => countSyllables(word))
+      .filter((syllable) => syllable !== undefined)
+  );
+
   const score =
     206.835 -
-    (1.015 * words.length) / numberOfSentences -
-    (84.6 * totSyllables) / words.length;
+    (1.015 * numberOfWords) / numberOfSentences -
+    (84.6 * numberOfSyllables) / numberOfWords;
   const index = getScore(score, fleschScores, false);
+
   const readabilityIndex = {
     index: index,
     score: fleschScores.find((score) => score.mark === index).letterScore,

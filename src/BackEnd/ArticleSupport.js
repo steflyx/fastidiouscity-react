@@ -14,8 +14,11 @@ async function isArticleSupporting(claim, article) {
 
 export async function getRelatedArticles(claim) {
   const relatedArticlesUrls = await retrieveRelatedUrls(claim);
+  const availableUrls = relatedArticlesUrls.filter(
+    (url) => url.substr(url.length - 3, url.length - 1) !== "pdf"
+  );
   const relatedArticles = await Promise.all(
-    relatedArticlesUrls.map((url) => scrapeCleanArticle(url))
+    availableUrls.map((url) => scrapeCleanArticle(url))
   );
   const relatedArticlesClean = relatedArticles.filter(
     (article) => article !== "Articolo irragiungibile"

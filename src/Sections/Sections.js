@@ -26,11 +26,15 @@ export class Sections {
     this.outputs = null;
   }
 
-  async compute(inputText, onComplete) {
-    this.outputs = await Promise.all(
-      sections.map((section) => section.compute(inputText))
-    );
-    onComplete();
+  async compute(inputText, onComplete, onFailure) {
+    try {
+      this.outputs = await Promise.all(
+        sections.map((section) => section.compute(inputText))
+      );
+      onComplete();
+    } catch {
+      onFailure();
+    }
   }
 
   draw(externalCSS) {

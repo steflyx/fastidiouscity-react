@@ -13,3 +13,8 @@
 .loadingText{
   text-align: center;
 }
+
+.loadingTextSmall{
+  font-size: 18px;
+  margin-top: 5px;
+}

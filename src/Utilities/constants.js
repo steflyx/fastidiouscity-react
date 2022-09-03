@@ -2,6 +2,7 @@ export const STATUS_TYPES = {
   WAITING_INPUT: 1,
   PROCESSING: 2,
   PROCESSED: 3,
+  ERROR: 4,
 };
 
 export const MAX_ARTICLE_LENGTH = 5000;

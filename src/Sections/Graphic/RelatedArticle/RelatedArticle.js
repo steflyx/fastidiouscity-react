@@ -23,9 +23,7 @@ export function RelatedArticle({ article }) {
         }}
       >
         <div className="mainData">
-          <p className="supportingText">
-            Supports the claim{/*article.isSupporting*/}
-          </p>
+          <p className="supportingText">{article.isSupporting}</p>
           <p className="articleTitle">{article.title}</p>
           <p className="articleText">{article.text}</p>
         </div>
