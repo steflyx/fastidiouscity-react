@@ -1,10 +1,7 @@
 import "./Input.css";
 import { examples } from "../../Examples/Examples";
-import { useState } from "react";
 
 export function Input({ inputText, setInputText, analyze }) {
-  const [selectedSpeech, setSelectedSpeech] = useState(null);
-
   function getNumberOfWords(text) {
     return text !== null && text !== undefined ? text.split(" ").length : 0;
   }
@@ -43,7 +40,6 @@ export function Input({ inputText, setInputText, analyze }) {
           id="speech-input"
           onChange={(evt) => {
             setInputText(evt.target.value);
-            setSelectedSpeech(null);
           }}
           placeholder="Paste your text here..."
         ></textarea>
@@ -60,14 +56,11 @@ export function Input({ inputText, setInputText, analyze }) {
                 onMouseUp={() => {
                   document.getElementById("speech-input").value = example.text;
                   setInputText(example.text);
-                  setSelectedSpeech(example.name);
                 }}
                 key={key}
               >
                 <span
-                  className={
-                    example.name === selectedSpeech ? "halfHighlight" : ""
-                  }
+                  className={example.text === inputText ? "halfHighlight" : ""}
                 >
                   <span className="speechName">{example.name}</span> -{" "}
                   {example.author}
