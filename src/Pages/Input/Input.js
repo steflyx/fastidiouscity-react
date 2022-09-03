@@ -1,11 +1,17 @@
 import "./Input.css";
 import { examples } from "../../Examples/Examples";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export function Input({ setInputText, analyze }) {
+export function Input({ inputText, setInputText, analyze }) {
   const [selectedSpeech, setSelectedSpeech] = useState(null);
 
-  //useEffect(() => analyze());
+  function getNumberOfWords(text) {
+    return text !== null && text !== undefined ? text.split(" ").length : 0;
+  }
+
+  function isTextValid() {
+    return getNumberOfWords(inputText) <= 1000;
+  }
 
   return (
     <section id="input-section">
@@ -32,14 +38,19 @@ export function Input({ setInputText, analyze }) {
           />
         </svg>
       </div>
-      <textarea
-        id="speech-input"
-        onChange={(evt) => {
-          setInputText(evt.target.value);
-          setSelectedSpeech(null);
-        }}
-        placeholder="Paste your text here..."
-      ></textarea>
+      <div className="speechInputContainer">
+        <textarea
+          id="speech-input"
+          onChange={(evt) => {
+            setInputText(evt.target.value);
+            setSelectedSpeech(null);
+          }}
+          placeholder="Paste your text here..."
+        ></textarea>
+        <p className={isTextValid() ? "" : "warningLength"}>
+          {getNumberOfWords(inputText)}/1000
+        </p>
+      </div>
       <div className="flexRow">
         <div className="exampleList">
           <p>Or try with one of our examples:</p>
@@ -66,7 +77,10 @@ export function Input({ setInputText, analyze }) {
           </ul>
         </div>
         <div className="buttonContainer">
-          <button className="button" onMouseUp={analyze}>
+          <button
+            className={"button" + (isTextValid() ? "" : " disabled")}
+            onMouseUp={() => (isTextValid() ? analyze() : null)}
+          >
             Analyze!
           </button>
         </div>

@@ -1,0 +1,22 @@
+.footerTopBorder{
+    width: 90vw;
+    border-top: solid 1px black;
+    position: absolute;
+    left: 2em;
+}
+
+.footer{
+    display: flex;
+    gap: 50px;
+    padding: 2em;
+}
+
+.footer h2{
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+}
+
+.footer h2:hover{
+    color: var(--light-font-hover);
+}

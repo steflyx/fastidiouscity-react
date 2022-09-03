@@ -19,7 +19,7 @@ export function DrawMainClaim({ output }) {
       <div>
         <h3>
           <span className="halfHighlight">
-            Here’s some articles related to this claim
+            Here are some articles related to this claim
           </span>
         </h3>
         <div className="articleGallery">

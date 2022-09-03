@@ -2,6 +2,10 @@
   --main-green: #C6F887;
   --green-hover: #84a55c;
   --link-color: #020D89;
+  --light-font: #6C6C6C;
+  --red-negative: #C91403;
+  --green-positive: #47A445;
+  --light-font-hover: #919191
 }
 
 @font-face {

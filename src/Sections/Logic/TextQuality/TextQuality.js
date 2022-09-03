@@ -69,7 +69,8 @@ function countSyllables(word) {
   }
   word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "");
   word = word.replace(/^y/, "");
-  return word.match(/[aeiouy]{1,2}/g).length;
+  const syllables = word.match(/[aeiouy]{1,2}/g);
+  return syllables === null ? null : syllables.length;
 }
 
 function computeFleschScore(text) {
@@ -86,7 +87,9 @@ function computeFleschScore(text) {
 
   const numberOfSentences = computeSentences(text).length;
   const words = removePunctuation(text).split(" ");
-  const syllablesPerWord = words.map((word) => countSyllables(word));
+  const syllablesPerWord = words
+    .map((word) => countSyllables(word))
+    .filter((syllable) => syllable !== null);
   const totSyllables = syllablesPerWord.reduce((a, b) => a + b, 0);
   const score =
     206.835 -

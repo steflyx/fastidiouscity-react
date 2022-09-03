@@ -3,6 +3,7 @@ import { Input, LoadingPage, Output } from "./Pages/Pages";
 import { Sections } from "./Sections/Sections";
 import { STATUS_TYPES } from "./Utilities/constants";
 import { examples } from "./Examples/Examples";
+import { Credits } from "./ReusableComponents/Credits/Credits";
 
 function App() {
   const [inputText, setInputText] = useState(null);
@@ -24,7 +25,12 @@ function App() {
   if (status === STATUS_TYPES.WAITING_INPUT) {
     return (
       <main>
-        <Input setInputText={setInputText} analyze={analyzeInput} />
+        <Input
+          inputText={inputText}
+          setInputText={setInputText}
+          analyze={analyzeInput}
+        />
+        <Credits />
       </main>
     );
   }
@@ -39,6 +45,7 @@ function App() {
     return (
       <main>
         <Output sections={sections} />
+        <Credits />
       </main>
     );
   }

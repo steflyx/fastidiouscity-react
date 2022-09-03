@@ -2,6 +2,7 @@
     width: 90%;
     max-width: 960px;
     margin: 2em auto;
+    margin-bottom: 70px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -33,6 +34,24 @@
 
 .arrowBackground:hover{
     background: var(--green-hover);
+}
+
+.speechInputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.speechInputContainer p{
+    text-align: right;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--light-font);
+    font-family: 'Bodoni 72', sans-serif;
+}
+
+.speechInputContainer p.warningLength{
+    color: var(--red-negative);
 }
 
 textarea{
@@ -120,4 +139,9 @@ ul li{
 
 .button:hover{
     background-color: var(--green-hover);
+}
+
+.button.disabled{
+    background-color: var(--light-font);
+    cursor: initial;
 }

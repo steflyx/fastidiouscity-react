@@ -29,7 +29,12 @@ export function RelatedArticle({ article }) {
           <p className="articleTitle">{article.title}</p>
           <p className="articleText">{article.text}</p>
         </div>
-        <a className="readArticle" href={article.url}>
+        <a
+          className="readArticle"
+          href={article.url}
+          target="_blank"
+          rel="noreferrer"
+        >
           Read it
         </a>
       </div>

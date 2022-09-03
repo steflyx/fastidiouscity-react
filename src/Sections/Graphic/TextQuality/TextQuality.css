@@ -64,9 +64,9 @@
 }
 
 .positiveScore{
-    color: #47A445;
+    color: var(--green-positive);
 }
 
 .negativeScore{
-    color: #C91403;
+    color: var(--red-negative);
 }

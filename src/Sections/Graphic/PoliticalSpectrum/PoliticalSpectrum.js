@@ -9,6 +9,10 @@ function computePoliticalLeaning(response) {
   return "neutral";
 }
 
+function cleanOutput(output) {
+  return output.toLocaleLowerCase().replace("this speech is", "").trim();
+}
+
 export function DrawPoliticalSpectrum({ output }) {
   const leaning = computePoliticalLeaning(output.toLocaleLowerCase());
   const barPosition = {
@@ -22,7 +26,7 @@ export function DrawPoliticalSpectrum({ output }) {
       <h3>
         <span className="halfHighlight">Text Analysis</span>
       </h3>
-      <p>The speech appears to be {output}</p>
+      <p>The speech appears to be {cleanOutput(output)}</p>
       <div className="politicalSpectrumBarContainer">
         <svg
           width="159"

@@ -50,10 +50,11 @@ export async function scrapeArticle(link) {
         if (res.status === 200) {
           return res.json();
         }
-        if (res.status === 400) {
-          return "Articolo irraggiungibile";
-        }
-        throw "Errore di connessione con il server";
+        return {
+          text: "Article unreachable",
+          title: "Article unreachable",
+          url: link,
+        };
       })
       .then((res) => {
         return {
@@ -64,7 +65,11 @@ export async function scrapeArticle(link) {
         };
       });
   } catch (error) {
-    throw "Errore di connessione con il server";
+    return {
+      text: "Article unreachable",
+      title: "Article unreachable",
+      url: link,
+    };
   }
 }
 
@@ -79,6 +84,7 @@ async function cleanAndSummarizeArticle(text) {
 
 export async function scrapeCleanArticle(link) {
   const article = await scrapeArticle(link);
+  if (article.text === "Article unreachable") return article;
   article.text = await cleanAndSummarizeArticle(article.text);
   return article;
 }

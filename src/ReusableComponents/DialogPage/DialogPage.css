@@ -1,0 +1,83 @@
+:root{
+    --background-cover: rgb(0,0,0,0.6);
+    --dialog-background: white;
+    --option-border: #F0F2F5;
+    --option-border-hover: #788D9A;
+}
+
+.invisible{
+    display: none !important;
+}
+
+.external-cover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--background-cover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.internal-container{
+    position: relative;
+    background-color: var(--dialog-background);
+    border-radius: 20px;
+    padding: 2em;
+    width: 85vw;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (min-width: 600px){
+    .internal-container{
+        padding: 3em;
+    }
+}
+
+@media (min-width: 768px){
+    .internal-container{
+        padding: 4em;
+    }
+}
+
+@media (min-width: 1000px){
+    .internal-container{
+        width: 60vw
+    }
+}
+
+.internal-container h1{
+    margin-bottom: 20px;
+}
+
+.textInfo{
+    text-align: left;
+    width: 100%;
+}
+
+.close-dialog{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    color: var(--light-font);
+    cursor: pointer;
+    font-size: 35px;
+}
+
+@media (max-width: 600px){
+    .close-dialog{
+        top: 2%;
+        right: 7%;
+    }
+}
+
+.close-dialog:hover{
+    color: var(--light-font-hover);
+}
